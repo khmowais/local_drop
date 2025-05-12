@@ -1,36 +1,36 @@
 #!/bin/bash
 
-USB_MOUNT="/media/$USER" # Adjust if your distro mounts elsewhere
+USB_MOUNT="/media/ap2kmo/USB_SAMSUNG"  # Your real USB path
 DROPBOX_FOLDER_NAME="dropbox"
 RECEIVE_DIR="$HOME/LocalDropReceived"
 
 mkdir -p "$RECEIVE_DIR"
 
 send_file() {
-    echo "[*] Scanning for USB drives..."
-    for mount in "$USB_MOUNT"/*; do
-        if [ -d "$mount" ]; then
-            DROPBOX="$mount/$DROPBOX_FOLDER_NAME"
-            mkdir -p "$DROPBOX"
-            echo "[+] Sending '$1' to $DROPBOX"
-            cp "$1" "$DROPBOX/"
-            echo "[✓] File sent to USB: $mount"
-            return
-        fi
-    done
-    echo "[!] No USB drive found."
+    echo "[*] Sending file to USB..."
+
+    if [ ! -d "$USB_MOUNT" ]; then
+        echo "[!] USB not mounted at $USB_MOUNT"
+        return
+    fi
+
+    DROPBOX="$USB_MOUNT/$DROPBOX_FOLDER_NAME"
+    mkdir -p "$DROPBOX" || { echo "[!] Failed to create dropbox folder."; return; }
+
+    cp "$1" "$DROPBOX/" && echo "[✓] File sent to USB: $DROPBOX"
 }
 
 receive_files() {
     echo "[*] Looking for files to receive from USB..."
-    for mount in "$USB_MOUNT"/*; do
-        DROPBOX="$mount/$DROPBOX_FOLDER_NAME"
-        if [ -d "$DROPBOX" ]; then
-            echo "[+] Receiving from: $DROPBOX"
-            cp "$DROPBOX"/* "$RECEIVE_DIR/" 2>/dev/null
-            echo "[✓] Files received to $RECEIVE_DIR"
-        fi
-    done
+
+    DROPBOX="$USB_MOUNT/$DROPBOX_FOLDER_NAME"
+
+    if [ -d "$DROPBOX" ]; then
+        cp "$DROPBOX"/* "$RECEIVE_DIR/" 2>/dev/null
+        echo "[✓] Files received to $RECEIVE_DIR"
+    else
+        echo "[!] No dropbox folder found on USB."
+    fi
 }
 
 print_help() {
