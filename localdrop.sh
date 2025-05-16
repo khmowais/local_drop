@@ -13,13 +13,13 @@ show_menu() {
 case "$1" in
     usb)
         shift
-        ./localdrop_usb.sh "$@"
+        ./scripts/localdrop_usb.sh "$@"
         ;;
     serve)
-        ./localdrop_server.sh
+        ./scripts/localdrop_server.sh
         ;;
     chat)
-        ./localdrop_chat.sh
+        ./scripts/localdrop_chat.sh
         ;;
     help|*)
         show_menu

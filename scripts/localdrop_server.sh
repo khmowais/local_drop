@@ -18,12 +18,29 @@ generate_index() {
     echo "[✓] index.html created."
 }
 
+watch_and_update_index() {
+    inotifywait -m -e create -e delete --format '%f' "$SHARE_DIR" | while read change; do
+        if [[ "$change" != "index.html" ]]; then
+            generate_index
+        fi
+    done
+}
+
 start_server() {
     echo "[*] Starting local file server on http://0.0.0.0:$PORT"
     cd "$SHARE_DIR" || exit 1
-    python3 -m http.server "$PORT"
-}
 
-# Main
+    # Start watching for changes in background
+    watch_and_update_index &
+    WATCHER_PID=$!
+
+    # Start the server in the foreground
+    python3 -m http.server "$PORT"
+
+    # Kill the watcher when server stops
+	trap 'echo "[*] Stopping server..."; if ps -p $WATCHER_PID > /dev/null 2>&1; then kill $WATCHER_PID; fi; exit 0' INT
+    }
+
+# Initial setup
 generate_index
 start_server
