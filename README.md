@@ -6,15 +6,15 @@ LocalDrop is a lightweight offline-first file sharing and communication system d
 
 ## Features
 
-- ✅ **Send/Receive files via USB** — Simple CLI utility to move files using a USB drive.
-- ✅ **Local file server** — Launches a minimal web interface for non-tech users to access shared files over a browser.
-- 🛠️ Planned: **Peer-to-peer chat** over LAN or hotspot.
-- 🛠️ Planned: **Bluetooth file transfer**
-- 🛠️ Planned: **Mesh/Hotspot sharing system**
+-  **Send/Receive files via USB** — Simple CLI utility to move files using a USB drive.
+-  **Local file server** — Launches a minimal web interface for non-tech users to access shared files over a browser.
+-  Planned: **Peer-to-peer chat** over LAN or hotspot.
+-  Planned: **Bluetooth file transfer**
+-  Planned: **Mesh/Hotspot sharing system**
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 LocalDrop/
@@ -65,10 +65,10 @@ Then open `http://localhost:8080` in your browser.
 
 ## Roadmap
 
-* [ ] Peer-to-peer chat system
-* [ ] Bluetooth support for file and text transfer
-* [ ] Wi-Fi hotspot-based mesh support
-* [ ] Web UI for browsing, uploading, chatting
+*  Peer-to-peer chat system
+*  Bluetooth support for file and text transfer
+*  Wi-Fi hotspot-based mesh support
+*  Web UI for browsing, uploading, chatting
 
 ---
 
