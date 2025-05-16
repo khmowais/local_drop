@@ -2,7 +2,7 @@
 
 USB_MOUNT="/media/ap2kmo/USB_SAMSUNG"  # Adjust as needed
 DROPBOX_FOLDER_NAME="dropbox"
-RECEIVE_DIR="$HOME/LocalDropReceived"
+RECEIVE_DIR="$HOME/LocalDrop/LocalDropReceived"
 
 mkdir -p "$RECEIVE_DIR"
 
