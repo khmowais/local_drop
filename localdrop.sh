@@ -16,7 +16,8 @@ case "$1" in
         ./scripts/localdrop_usb.sh "$@"
         ;;
     serve)
-        ./scripts/localdrop_server.sh
+        bash scripts/localdrop_server.sh
+        python3 scripts/upload_server.py
         ;;
     chat)
         ./scripts/localdrop_chat.sh
